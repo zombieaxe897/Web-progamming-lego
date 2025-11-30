@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGO Collection Manager</title>
+    
+    <!-- supabase library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- my stylesheet -->
+    <link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+<body>
+    <!-- floating lego brick decorations in the background -->
+    <div class="brick-accent brick-1"></div>
+    <div class="brick-accent brick-2"></div>
+    <div class="brick-accent brick-3"></div>
+    <div class="brick-accent brick-4"></div>
+    <div class="brick-accent brick-5"></div>
+    <div class="brick-accent brick-6"></div>
+    <div class="brick-accent brick-7"></div>
+    <div class="brick-accent brick-8"></div>
+
+    <div class="container">
+        <!-- header section -->
+        <div class="header">
+            <h1>LEGO VAULT</h1>
+            <p>Your Personal Collection Manager</p>
+        </div>
+
+        <!-- login/signup page - shows first when you open the site -->
+        <div id="authContainer" class="auth-container">
+            <div class="auth-form">
+                <h2 id="authTitle">Login</h2>
+                <div id="authMessage"></div>
+                
+                <form id="authForm">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="authEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="authPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" id="authSubmit">Login</button>
+                </form>
+                
+                <!-- toggle between login and signup -->
+                <div class="auth-toggle">
+                    <span id="authToggleText">Don't have an account? <a id="authToggleLink">Sign up</a></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- main app - hidden until user logs in -->
+        <div id="appContainer" class="app-container hidden">
+            <!-- top bar with title and logout button -->
+            <div class="top-bar">
+                <h2>My Collection</h2>
+                <button onclick="logout()" class="btn-secondary">Logout</button>
+            </div>
+
+            <!-- messages show here when you add/delete sets -->
+            <div id="appMessage"></div>
+
+            <!-- form to add new lego sets -->
+            <div class="add-set-form">
+                <h3>Add New Set</h3>
+                <form id="addSetForm">
+                    <!-- first row - basic info -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Set Number</label>
+                            <input type="text" id="setNumber" required placeholder="75192">
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="setName" required placeholder="Millennium Falcon">
+                        </div>
+                        <div class="form-group">
+                            <label>Theme</label>
+                            <input type="text" id="setTheme" required placeholder="Star Wars">
+                        </div>
+                    </div>
+                    
+                    <!-- second row - details -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="number" id="setYear" min="1950" max="2030" placeholder="2017">
+                        </div>
+                        <div class="form-group">
+                            <label>Piece Count</label>
+                            <input type="number" id="setPieceCount" min="1" placeholder="7541">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="setStatus">
+                                <option value="wishlist">Wishlist</option>
+                                <option value="owned">Owned</option>
+                                <option value="building">Building</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- optional stuff -->
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="url" id="setImageUrl" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="setNotes" rows="3" placeholder="Additional notes about this set..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-blue">Add to Collection</button>
+                </form>
+            </div>
+
+            <!-- filters for searching and sorting sets -->
+            <div class="filters">
+                <select id="filterStatus" onchange="loadSets()">
+                    <option value="">All Status</option>
+                    <option value="owned">Owned</option>
+                    <option value="wishlist">Wishlist</option>
+                    <option value="building">Building</option>
+                </select>
+                <input type="text" id="searchSets" placeholder="Search sets..." oninput="loadSets()">
+            </div>
+
+            <!-- grid where all the lego set cards appear -->
+            <div id="setsGrid" class="sets-grid"></div>
+        </div>
+    </div>
+
+    <!-- load my javascript files -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
