@@ -84,6 +84,7 @@ async function logout() {
 function showApp() {
     document.getElementById('authContainer').classList.add('hidden');
     document.getElementById('appContainer').classList.remove('hidden');
+    loadUserDisplay(); // load and display username
 }
 
 // show success or error messages

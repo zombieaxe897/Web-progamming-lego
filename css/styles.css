@@ -237,6 +237,54 @@ button:hover {
     display: none;
 }
 
+/* main navigation menu */
+.main-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: rgba(220, 10, 45, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(220, 10, 45, 0.2);
+}
+
+.main-nav a {
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9em;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.main-nav a:hover {
+    background: rgba(220, 10, 45, 0.2);
+    transform: translateY(-2px);
+}
+
+.main-nav a.active {
+    background: linear-gradient(135deg, #dc0a2d 0%, #b8081f 100%);
+    box-shadow: 0 4px 15px rgba(220, 10, 45, 0.3);
+}
+
+/* user info in top bar */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info span {
+    color: #ffc107;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+}
+
 /* top bar with title and logout */
 .top-bar {
     display: flex;

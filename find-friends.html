@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Friends - LEGO Collection Manager</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- floating lego brick decorations in the background -->
+    <div class="brick-accent brick-1"></div>
+    <div class="brick-accent brick-2"></div>
+    <div class="brick-accent brick-3"></div>
+    <div class="brick-accent brick-4"></div>
+    <div class="brick-accent brick-5"></div>
+    <div class="brick-accent brick-6"></div>
+    <div class="brick-accent brick-7"></div>
+    <div class="brick-accent brick-8"></div>
+
+    <div class="container">
+        <!-- header section -->
+        <div class="header">
+            <h1>LEGO VAULT</h1>
+            <p>Your Personal Collection Manager</p>
+        </div>
+
+        <div id="appContainer" class="app-container">
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="index.html">My Collection</a>
+                <a href="profile.html">Profile</a>
+                <a href="friends.html">Friends</a>
+                <a href="find-friends.html" class="active">Find Friends</a>
+            </nav>
+
+            <div class="top-bar">
+                <h2>Find Friends</h2>
+                <div class="user-info">
+                    <span id="userDisplay">Loading...</span>
+                    <button onclick="logout()" class="btn-secondary">Logout</button>
+                </div>
+            </div>
+
+            <div id="appMessage"></div>
+
+            <!-- Search Section -->
+            <div class="add-set-form">
+                <h3>Search for Users</h3>
+                <div class="filters">
+                    <input type="text" id="searchUsers" placeholder="Search by username..." oninput="searchUsers()">
+                </div>
+                <div id="searchResults" class="sets-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- load javascript files -->
+    <script src="js/config.js"></script>
+    <script src="js/find-friends.js"></script>
+</body>
+</html>

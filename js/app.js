@@ -2,6 +2,25 @@
 
 let editingSetId = null; // track which set we're editing
 
+// load and display username
+async function loadUserDisplay() {
+    try {
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('username')
+            .eq('id', currentUser.id)
+            .maybeSingle();
+
+        if (profile && profile.username) {
+            document.getElementById('userDisplay').textContent = `@${profile.username}`;
+        } else {
+            document.getElementById('userDisplay').textContent = currentUser.email;
+        }
+    } catch (error) {
+        document.getElementById('userDisplay').textContent = currentUser.email;
+    }
+}
+
 // handle adding new sets
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addSetForm').addEventListener('submit', addSet);
@@ -153,12 +172,18 @@ async function deleteSet(id) {
 
 // custom confirmation dialog
 function showLegoConfirm(message, onConfirm) {
+    // remove any existing confirm dialogs first
+    const existingOverlay = document.querySelector('.lego-confirm-overlay');
+    if (existingOverlay) {
+        existingOverlay.remove();
+    }
+    
     const overlay = document.createElement('div');
-    overlay.className = 'confirm-overlay';
+    overlay.className = 'lego-confirm-overlay';
     overlay.innerHTML = `
-        <div class="confirm-dialog">
+        <div class="lego-confirm-dialog">
             <p>${message}</p>
-            <div class="confirm-buttons">
+            <div class="lego-confirm-buttons">
                 <button class="confirm-yes btn-danger">Delete</button>
                 <button class="confirm-no btn-secondary">Cancel</button>
             </div>

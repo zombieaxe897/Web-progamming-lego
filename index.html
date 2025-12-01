@@ -56,10 +56,21 @@
 
         <!-- main app - hidden until user logs in -->
         <div id="appContainer" class="app-container hidden">
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <a href="index.html" class="active">My Collection</a>
+                <a href="profile.html">Profile</a>
+                <a href="friends.html">Friends</a>
+                <a href="find-friends.html">Find Friends</a>
+            </nav>
+
             <!-- top bar with title and logout button -->
             <div class="top-bar">
                 <h2>My Collection</h2>
-                <button onclick="logout()" class="btn-secondary">Logout</button>
+                <div class="user-info">
+                    <span id="userDisplay">Loading...</span>
+                    <button onclick="logout()" class="btn-secondary">Logout</button>
+                </div>
             </div>
 
             <!-- messages show here when you add/delete sets -->
