@@ -1,5 +1,5 @@
 // handles profile management
-// NOTE: currentUser is declared in config.js
+// currentUser is declared in config.js
 
 // check authentication
 async function checkAuth() {
@@ -30,6 +30,9 @@ async function loadProfile() {
             
             // update display with username
             document.getElementById('userDisplay').textContent = `@${profile.username}`;
+            
+            // update avatar preview
+            updateAvatarPreview(profile.avatar_url);
         } else {
             // no profile yet, show email
             document.getElementById('userDisplay').textContent = currentUser.email;
@@ -41,6 +44,35 @@ async function loadProfile() {
         console.error('Error loading profile:', error);
         document.getElementById('userDisplay').textContent = currentUser.email;
     }
+}
+
+// update avatar preview when URL changes
+function updateAvatarPreview(url) {
+    const previewContainer = document.getElementById('avatarPreview');
+    const avatarUrl = url || document.getElementById('avatarUrl').value.trim();
+    
+    if (avatarUrl) {
+        previewContainer.innerHTML = `<img src="${avatarUrl}" alt="Profile Avatar" onerror="showAvatarError()">`;
+    } else {
+        previewContainer.innerHTML = `
+            <div class="avatar-placeholder">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="40" cy="30" r="12" fill="currentColor"/>
+                    <path d="M20 60 C20 50, 25 45, 40 45 C55 45, 60 50, 60 60 Z" fill="currentColor"/>
+                </svg>
+            </div>
+        `;
+    }
+}
+
+// show error if avatar image fails to load
+function showAvatarError() {
+    const previewContainer = document.getElementById('avatarPreview');
+    previewContainer.innerHTML = `
+        <div class="avatar-placeholder" style="border: 2px solid #dc0a2d;">
+            <p style="color: #dc0a2d; font-size: 0.9em; padding: 10px; text-align: center;">Image failed to load. Check URL.</p>
+        </div>
+    `;
 }
 
 // handle profile form submission
